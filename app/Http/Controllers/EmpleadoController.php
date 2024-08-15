@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
 use App\Models\Empleado;
+
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Validator as ValidationValidator;
+use PhpParser\Node\Expr\FuncCall;
 use Symfony\Contracts\Service\Attribute\Required;
+
 
 class EmpleadoController extends Controller
 {
@@ -14,6 +18,26 @@ class EmpleadoController extends Controller
      * Display a listing of the resource.
      * @return Illuminate\Http\Response
      */
+
+     public function apiget(){
+
+        $datas=Empleado::all();
+
+        if($datas->isEmpty()){
+            $datas=['message'=>'No se encontraron Estudiantes',
+                    'status'=>400];
+        }
+
+        return response()->json($datas,200);
+     }
+
+ 
+ /*   public function apistore(Request $request)
+    {
+   
+}*/
+
+
     public function index()
     {
 
